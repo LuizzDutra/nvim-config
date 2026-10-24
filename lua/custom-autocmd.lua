@@ -266,7 +266,7 @@ api.nvim_create_autocmd("BufReadPre", {
 
 -- check if current file is formatted
 local ft_to_command = {
-  python = { "black", "--check" },
+  python = { "ruff", "check" },
   lua = { "stylua", "--check" },
 }
 
@@ -280,6 +280,7 @@ api.nvim_create_autocmd("BufWritePost", {
 
     local cmd_partial = ft_to_command[ft]
     local cmd = nil
+    -- cmd_partial = nil
     if cmd_partial ~= nil then
       cmd = vim.deepcopy(cmd_partial)
       table.insert(cmd, fpath)

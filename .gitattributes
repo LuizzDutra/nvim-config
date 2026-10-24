@@ -1,0 +1,4 @@
+# Normalize text files to LF in the repository and in the working tree.
+# Keeps `stylua --check` and pre-commit hooks consistent on Windows, where
+# core.autocrlf=true would otherwise check every file out as CRLF.
+* text=auto eol=lf

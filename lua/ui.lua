@@ -1,4 +1,4 @@
---- This module will load a random colorscheme on nvim startup process.
+--- This module loads the configured colorscheme on nvim startup process.
 local utils = require("utils")
 
 local M = {}
@@ -143,7 +143,8 @@ M.rand_colorscheme = function()
   return colorscheme
 end
 
-M.rand_colorscheme()
+-- Pin the startup colorscheme instead of picking a random one.
+M.colorscheme_conf.sonokai()
 
 -- enable the experiment UI
 require("vim._core.ui2").enable {

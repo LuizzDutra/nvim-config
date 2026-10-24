@@ -41,20 +41,21 @@ vim.keymap.set("n", "<F9>", run_py_script, {
 -- format current file
 
 local format_py_file = function()
-  local black_cmd = ""
+  local ruff_cmd = ""
   local py_env = utils.get_py_env()
 
   if py_env == "uv" then
-    black_cmd = "!uv run black"
-  elseif utils.executable("black") then
-    black_cmd = "!black"
+    ruff_cmd = "!uv run ruff format"
+  elseif utils.executable("ruff") then
+    ruff_cmd = "!ruff format"
   end
 
-  if black_cmd == "" then
-    vim.notify("black not available!")
+  if ruff_cmd == "" then
+    vim.notify("ruff not available!")
+    return
   end
 
-  local format_cmd = string.format("silent %s %%", black_cmd)
+  local format_cmd = string.format("silent %s %%", ruff_cmd)
 
   vim.cmd(format_cmd)
 end

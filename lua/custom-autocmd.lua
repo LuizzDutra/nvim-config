@@ -266,7 +266,7 @@ api.nvim_create_autocmd("BufReadPre", {
 
 -- check if current file is formatted
 local ft_to_command = {
-  python = { "ruff", "check" },
+  python = { "ruff", "format", "--check" },
   lua = { "stylua", "--check" },
 }
 

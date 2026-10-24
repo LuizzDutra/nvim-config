@@ -234,6 +234,10 @@ local virtual_env = function()
   end
 end
 
+local clock = function()
+  return os.date("%H:%M")
+end
+
 local get_active_lsp = function()
   local lsp_names_unordered = lsp_utils.get_attached_lsp()
   if next(lsp_names_unordered) == nil then
@@ -473,6 +477,7 @@ require("lualine").setup {
         virtual_env,
         color = { fg = "black", bg = "#F1CA81" },
       },
+      clock,
     },
   },
   inactive_sections = {

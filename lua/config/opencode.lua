@@ -28,7 +28,23 @@ vim.o.autoread = true
 
 local keymap = vim.keymap
 keymap.set({ "n", "x" }, "<leader>oa", function()
-  require("opencode").ask("@this: ")
+  require("opencode.server.discovery")
+    .get()
+    :next(function(server)
+      local context = require("opencode.context").new(server)
+      return require("opencode.ui.ask").ask("@this: ", context):next(function(input)
+        local name, args = input:match("^/([%w_%-/]+)%s*(.*)$")
+        if name then
+          return require("opencode.api.command").command(name, args, server)
+        end
+        return require("opencode.api.prompt").prompt(input, context)
+      end)
+    end)
+    :catch(function(err)
+      if err then
+        vim.notify(err, vim.log.levels.ERROR, { title = "opencode" })
+      end
+    end)
 end, { desc = "Ask OpenCode…" })
 keymap.set({ "n", "x" }, "<leader>os", function()
   require("opencode").select()

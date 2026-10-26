@@ -32,7 +32,7 @@ keymap.set({ "n", "x" }, "<leader>oa", function()
     .get()
     :next(function(server)
       local context = require("opencode.context").new(server)
-      return require("opencode.ui.ask").ask("@this: ", context):next(function(input)
+      return require("opencode.ui.ask").ask("", context):next(function(input)
         local name, args = input:match("^/([%w_%-/]+)%s*(.*)$")
         if name then
           return require("opencode.api.command").command(name, args, server)

@@ -41,6 +41,8 @@ require("blink.cmp").setup {
   sources = {
     default = { "lsp", "path", "buffer", "ultisnips" },
     providers = {
+      -- Display buffer completions (if included above) when no LSP completions are available
+      lsp = { fallbacks = {} },
       ultisnips = {
         -- IMPORTANT: use the same name as you would for nvim-cmp
         name = "ultisnips",
@@ -93,6 +95,7 @@ require("blink.cmp").setup {
     per_filetype = {
       text = { "dictionary" },
       markdown = { "dictionary" },
+      opencode_ask = { "lsp", "buffer" },
     },
   },
 

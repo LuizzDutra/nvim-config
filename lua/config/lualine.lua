@@ -477,6 +477,10 @@ require("lualine").setup {
         virtual_env,
         color = { fg = "black", bg = "#F1CA81" },
       },
+      {
+        -- Show the currently connected server and its status
+        require("opencode").statusline,
+      },
       clock,
     },
   },
